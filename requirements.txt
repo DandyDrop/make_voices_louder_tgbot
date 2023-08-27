@@ -1,0 +1,6 @@
+pytelegrambotapi
+flask~=2.3.3
+replit~=3.3.1
+soundfile~=0.12.1
+requests~=2.31.0
+pyloudnorm~=0.1.1
