@@ -25,7 +25,7 @@ def handle_telegram():
     return ''
 
 
-def normalize_audio(audio_bytes: bytes, fileformat: str = 'mp3'):
+def _normalize_audio(audio_bytes: bytes, fileformat: str = 'mp3'):
     data, rate = sf.read(io.BytesIO(audio_bytes))
     loudness = pyln.Meter(rate).integrated_loudness(data)
     if -20 < loudness:
@@ -69,7 +69,7 @@ def normalize_audio(m: types.Message):
         else:
             bot.send_voice(
                 m.chat.id,
-                normalize_audio(
+                _normalize_audio(
                     voice_buffer.getvalue()
                 ),
                 reply_to_message_id=m.message_id
@@ -84,5 +84,5 @@ def set_up_flask_app(app_to_set_up: Flask):
 
 if __name__ == '__main__':
     set_up_flask_app(app)
-    app.run('0.0.0.0', 3000)
+    app.run()
 
